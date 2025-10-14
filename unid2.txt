@@ -1,0 +1,4 @@
+(metodo + ruta + info)
+GET + ROUTE + INFO
+req = recibir
+rest = enviar
