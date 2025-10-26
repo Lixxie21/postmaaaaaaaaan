@@ -7,7 +7,7 @@ connectDB();
 app.use(express.json());
 
 // ---------- TUS ENDPOINTS ORIGINALES ----------
-app.get("/getAllCards", async (req, res) => {
+/*app.get("/getAllCards", async (req, res) => {
     try {
         const card = await Card.create(req.body);
         console.log(card);
@@ -26,7 +26,7 @@ app.get("/getCard/:id", async (req, res) => {
         res.status(400).send(error);
         console.error(error);
     }
-});
+});*/
 
 app.post("/send", (req, res) => {
     const { user, email } = req.body;
