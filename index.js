@@ -6,8 +6,8 @@ connectDB();
 
 app.use(express.json());
 
-// ---------- TUS ENDPOINTS ORIGINALES ----------
-/*app.get("/getAllCards", async (req, res) => {
+// quedan repetidos si los dejo
+app.get("/getAllCards", async (req, res) => {
     try {
         const card = await Card.create(req.body);
         console.log(card);
@@ -26,7 +26,7 @@ app.get("/getCard/:id", async (req, res) => {
         res.status(400).send(error);
         console.error(error);
     }
-});*/
+});
 
 app.post("/send", (req, res) => {
     const { user, email } = req.body;
@@ -38,9 +38,8 @@ app.get("/hello", (req, res) => {
     res.status(200).send("Idk I'm so tired, Finn");
 });
 
-// ---------- NUEVOS ENDPOINTS AÑADIDOS EN ESPAÑOL ----------
-
-// 1️⃣ CREAR TARJETA
+// tarea
+//createCard
 app.post("/createCard", async (req, res) => {
     try {
         const nuevaCard = await Card.create(req.body);
@@ -54,7 +53,7 @@ app.post("/createCard", async (req, res) => {
     }
 });
 
-// 2️⃣ ACTUALIZAR TARJETA (TOTAL)
+// update
 app.put("/updateCard/:id", async (req, res) => {
     try {
         const tarjetaActualizada = await Card.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -71,7 +70,7 @@ app.put("/updateCard/:id", async (req, res) => {
     }
 });
 
-// 3️⃣ ACTUALIZAR TARJETA (PARCIAL)
+// update2.0
 app.patch("/updateCardPartial/:id", async (req, res) => {
     try {
         const tarjetaParcial = await Card.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -88,7 +87,7 @@ app.patch("/updateCardPartial/:id", async (req, res) => {
     }
 });
 
-// 4️⃣ ELIMINAR TARJETA
+// delete
 app.delete("/deleteCard/:id", async (req, res) => {
     try {
         const tarjetaEliminada = await Card.findByIdAndDelete(req.params.id);
@@ -105,7 +104,7 @@ app.delete("/deleteCard/:id", async (req, res) => {
     }
 });
 
-// 5️⃣ OBTENER TARJETA POR ID
+/*
 app.get("/getcard/:id", async (req, res) => {
     try {
         const tarjeta = await Card.findById(req.params.id);
@@ -122,7 +121,6 @@ app.get("/getcard/:id", async (req, res) => {
     }
 });
 
-// 6️⃣ OBTENER TODAS LAS TARJETAS
 app.get("/getallcards", async (req, res) => {
     try {
         const tarjetas = await Card.find();
@@ -134,9 +132,8 @@ app.get("/getallcards", async (req, res) => {
         console.error(error);
         res.status(400).json({ mensaje: "Error al obtener las tarjetas", error });
     }
-});
+});*/
 
-// ---------- FIN NUEVOS ENDPOINTS ----------
 
 app.listen(3000, () => {
     console.log("Servidor ejecutándose en http://localhost:3000");
