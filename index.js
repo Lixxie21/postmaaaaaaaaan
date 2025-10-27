@@ -135,6 +135,74 @@ app.get("/getallcards", async (req, res) => {
 });*/
 
 
+
+
+
+//VETE ALV TODO ESO PA UNA MMDA AAAAAAAAAHH
+app.get("/endpoints", (req, res) => {
+  const baseUrl = "https://postmaaaaaaaaan.onrender.com";
+
+  const template = [
+    {
+      path: `${baseUrl}/createCard`,
+      method: "POST",
+      description: "Crea una nueva tarjeta en la base de datos"
+    },
+    {
+      path: `${baseUrl}/updateCard/:id`,
+      method: "PUT",
+      description: "Actualiza completamente una tarjeta por su ID"
+    },
+    {
+      path: `${baseUrl}/updateCardPartial/:id`,
+      method: "PATCH",
+      description: "Actualiza parcialmente una tarjeta por su ID"
+    },
+    {
+      path: `${baseUrl}/deleteCard/:id`,
+      method: "DELETE",
+      description: "Elimina una tarjeta por su ID"
+    },
+    {
+      path: `${baseUrl}/getcard/:id`,
+      method: "GET",
+      description: "Obtiene una tarjeta específica por su ID"
+    },
+    {
+      path: `${baseUrl}/getallcards`,
+      method: "GET",
+      description: "Obtiene todas las tarjetas registradas"
+    },
+    {
+      path: `${baseUrl}/send`,
+      method: "POST",
+      description: "Recibe datos enviados por el usuario (nombre, correo, etc.)"
+    },
+    {
+      path: `${baseUrl}/hello`,
+      method: "GET",
+      description: "Devuelve un mensaje de prueba"
+    },
+    {
+      path: `${baseUrl}/getAllCards`,
+      method: "GET",
+      description: "Endpoint de prueba existente (crea tarjeta al recibir cuerpo)"
+    },
+    {
+      path: `${baseUrl}/getCard/:id`,
+      method: "GET",
+      description: "Endpoint original para obtener una tarjeta por ID"
+    }
+  ];
+
+  res.status(200).json({
+    mensaje: "Listado de endpoints disponibles en la API",
+    total: template.length,
+    rutas: template
+  });
+});
+
+
 app.listen(3000, () => {
     console.log("Servidor ejecutándose en http://localhost:3000");
 });
