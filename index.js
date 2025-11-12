@@ -1,6 +1,7 @@
 import express from "express";
 import { connectDB } from "./db.js";
 import { Card } from "./models/card.js";
+import { Students } from "./models/students.js";
 const app = express();
 connectDB();
 
@@ -202,6 +203,79 @@ app.get("/endpoints", (req, res) => {
   });
 });
 
+//Pues qué crees, hdptm ?? HAY MÁS
+//STUDENTS start
+
+app.get("/getAllStudents", async (req, res) => {
+    try {
+        const student = await Students.create(req.body);
+        console.log(student);
+        res.status(200).json(student).send("student registred succesfully");
+    } catch (error) {
+        console.error(error);
+    }
+});
+
+app.get("/getStudent/:id", async (req, res) => {
+    try {
+        const id = parseInt(req.params.id);
+        const students = await Students.findById(req.params.id);
+        res.status(200).json(students);
+    } catch (error) {
+        res.status(400).send(error);
+        console.error(error);
+    }
+});
+
+app.post("/registredStudent", async (req, res) => {
+    try {
+        const nuevaStudent = await Students.create(req.body);
+        res.status(201).json({
+            mensaje: "Alumno registrado correctamente",
+            datos: nuevaStudent,
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({ mensaje: "Error al registrar al alumno", error });
+    }
+});
+
+// update
+app.put("/updateStudent/:id", async (req, res) => {
+    try {
+        const estudianteActualizado = await Students.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!estudianteActualizado)
+            return res.status(404).json({ mensaje: "Alumno no encontrado" });
+
+        res.status(200).json({
+            mensaje: "Datos actualizados correctamente",
+            datos: estudianteActualizado,
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({ mensaje: "Error al actualizar los datos", error });
+    }
+});
+
+
+// delete
+app.delete("/deleteStudent/:id", async (req, res) => {
+    try {
+        const estudianteEliminado = await Students.findByIdAndDelete(req.params.id);
+        if (!estudianteEliminado)
+            return res.status(404).json({ mensaje: "Alumno no encontrado" });
+
+        res.status(200).json({
+            mensaje: "Datos eliminados correctamente",
+            datos: estudianteEliminado,
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({ mensaje: "Error al eliminar los datos", error });
+    }
+});
+
+//STUDENTS end
 
 app.listen(3000, () => {
     console.log("Servidor ejecutándose en http://localhost:3000");
