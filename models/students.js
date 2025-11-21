@@ -1,26 +1,28 @@
 import mongoose from "mongoose";
-const cardSchema = new mongoose.Schema({
+const studentsSchema = new mongoose.Schema({
     name:{
         type: String,
         required: true,
         trim: true
     },
-    link:{
+    lastname:{
         type: String,
         required: true,
         trim: true
     },
-    description:{
+    group:{
         type: String,
+        required: true,
         trim: true
     },
-    like: {
-        type: Boolean,
-        default: false,
+    extrapoints:{
+        type: String,
+        required: true,
+        trim: true
     },
 },
 {
     timestamps: true,
 });
 
-export const Card = mongoose.model("Card", cardSchema);
+export const Students = mongoose.model("Students", studentsSchema);
